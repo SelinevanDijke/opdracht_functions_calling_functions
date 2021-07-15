@@ -20,18 +20,31 @@ const checkAgeTwo = function (theAge) {
 console.log(checkAgeTwo(20));
 
 // VAT exercise 1
-const calculate = function (basePrice) {
-    // * 9% - Uitkomst 18 cent
-    const calculateVAT = basePrice * 0.09;
-    console.log(calculateVAT);
-    //  * 109% - Uitkomst 2,18
-    const includeVAT = basePrice * 1.09;
-    return includeVAT;
+// Maak functie die de VAT berekend
+const calculateVAT = function(basePrice, VATPercentage) {
+    return basePrice * (VATPercentage / 100);
 };
-console.log(calculate(15));
 
+const calculatePriceIncludingVAT = function(basePrice, VATPercentage) {
+    const VAT = calculateVAT(basePrice, VATPercentage);
+    return basePrice + VAT;
+};
+
+console.log(calculatePriceIncludingVAT(1000, 21)); // 1210
+console.log(calculatePriceIncludingVAT(2, 9)); // 2.18
 
 // VAT exercise 2
-const 
+const calculateBasePrice = function(priceIncludingVAT, VATPercentage) {
+    const basePrice = priceIncludingVAT / ((100 + VATPercentage) / 100);
+    return basePrice;
+};
 
+const calculateBasePriceAndVAT = function(priceIncludingVAT, VATPercentage) {
+    const basePrice = calculateBasePrice(priceIncludingVAT, VATPercentage);
+    const VAT = priceIncludingVAT - basePrice;
+    return [basePrice, VAT];
+};
+
+console.log(calculateBasePriceAndVAT(1210, 21)); // [1000, 210]
+console.log(calculateBasePriceAndVAT(2.18, 9)); // [2, 0.18]
 
